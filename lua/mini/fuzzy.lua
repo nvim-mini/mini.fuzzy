@@ -1,10 +1,7 @@
 --- *mini.fuzzy* Fuzzy matching
---- *MiniFuzzy*
 ---
 --- MIT License Copyright (c) 2021 Evgeni Chasnovski
----
---- ==============================================================================
----
+
 --- Features:
 --- - Minimal and fast fuzzy matching algorithm which prioritizes match width.
 ---
@@ -13,7 +10,8 @@
 ---     - |MiniFuzzy.filtersort()|.
 ---     - |MiniFuzzy.process_lsp_items()|.
 ---
---- - Generator of |telescope.nvim| sorter: |MiniFuzzy.get_telescope_sorter()|.
+--- - Generator of sorter (|MiniFuzzy.get_telescope_sorter()|) for
+---   [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
 ---
 --- # Setup ~
 ---
@@ -35,9 +33,8 @@
 ---    but simple examples should work.
 --- 2. Smart case is used: case insensitive if input word (which is usually a
 ---    user input) is all lower case. Case sensitive otherwise.
+---@tag MiniFuzzy
 
---- # Algorithm design ~
----
 --- General design uses only width of found match and index of first letter
 --- match. No special characters or positions (like in fzy and fzf) are used.
 ---
@@ -92,9 +89,7 @@ MiniFuzzy.setup = function(config)
   H.apply_config(config)
 end
 
---- Module config
----
---- Default values:
+--- Defaults ~
 ---@eval return MiniDoc.afterlines_to_code(MiniDoc.current.eval_section)
 MiniFuzzy.config = {
   -- Maximum allowed value of match features (width and first match). All
@@ -156,8 +151,7 @@ end
 
 --- Custom getter for `telescope.nvim` sorter
 ---
---- Designed to be used as value for |telescope.defaults.file_sorter|
---- and |telescope.defaults.generic_sorter|.
+--- Designed as a value for file and generic sorter of 'telescope.nvim'.
 ---
 ---@param opts table|nil Options (currently not used).
 ---
